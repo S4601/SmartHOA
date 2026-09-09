@@ -1,0 +1,11 @@
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/bin/Debug/net10.0/SmartHOA.Domain.deps.json
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/bin/Debug/net10.0/SmartHOA.Domain.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/bin/Debug/net10.0/SmartHOA.Domain.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/SmartHOA.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/SmartHOA.Domain.AssemblyInfoInputs.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/SmartHOA.Domain.AssemblyInfo.cs
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/SmartHOA.Domain.csproj.CoreCompileInputs.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/SmartHOA.Domain.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/refint/SmartHOA.Domain.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/SmartHOA.Domain.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Domain/obj/Debug/net10.0/ref/SmartHOA.Domain.dll

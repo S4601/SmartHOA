@@ -1,0 +1,15 @@
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/bin/Debug/net10.0/SmartHOA.Application.deps.json
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/bin/Debug/net10.0/SmartHOA.Application.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/bin/Debug/net10.0/SmartHOA.Application.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/bin/Debug/net10.0/SmartHOA.Domain.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/bin/Debug/net10.0/SmartHOA.Domain.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.csproj.AssemblyReference.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.AssemblyInfoInputs.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.AssemblyInfo.cs
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.csproj.CoreCompileInputs.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.687A152B.Up2Date
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/refint/SmartHOA.Application.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/ref/SmartHOA.Application.dll

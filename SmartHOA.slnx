@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SmartHOA.Api/SmartHOA.Api.csproj" />
+  <Project Path="SmartHOA.Application/SmartHOA.Application.csproj" />
+  <Project Path="SmartHOA.Domain/SmartHOA.Domain.csproj" />
+  <Project Path="SmartHOA.Infrastructure/SmartHOA.Infrastructure.csproj" />
+</Solution>

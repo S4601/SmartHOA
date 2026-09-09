@@ -1,0 +1,17 @@
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/bin/Debug/net10.0/SmartHOA.Infrastructure.deps.json
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/bin/Debug/net10.0/SmartHOA.Infrastructure.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/bin/Debug/net10.0/SmartHOA.Infrastructure.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/bin/Debug/net10.0/SmartHOA.Application.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/bin/Debug/net10.0/SmartHOA.Domain.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/bin/Debug/net10.0/SmartHOA.Application.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/bin/Debug/net10.0/SmartHOA.Domain.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.csproj.AssemblyReference.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.AssemblyInfoInputs.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.AssemblyInfo.cs
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.BB6AD293.Up2Date
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/refint/SmartHOA.Infrastructure.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.pdb
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/ref/SmartHOA.Infrastructure.dll
