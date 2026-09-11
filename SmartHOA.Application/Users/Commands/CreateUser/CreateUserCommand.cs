@@ -1,6 +1,7 @@
 using MediatR;
 using SmartHOA.Application.Common.Interfaces;
 using SmartHOA.Domain.Entities;
+using SmartHOA.Domain.Enums;
 
 namespace SmartHOA.Application.Users.Commands.CreateUser;
 
@@ -9,6 +10,7 @@ public record CreateUserCommand(
     string LastName,
     string Email,
     string? PhoneNumber,
+    UserType UserType,
     string Password) : IRequest<Guid>;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
@@ -28,6 +30,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
             LastName = request.LastName,
             Email = request.Email,
             PhoneNumber = request.PhoneNumber,
+            UserType = request.UserType,
             PasswordHash = request.Password
         };
 

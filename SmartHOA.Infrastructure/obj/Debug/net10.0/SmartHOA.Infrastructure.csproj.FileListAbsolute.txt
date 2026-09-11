@@ -15,3 +15,4 @@
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/refint/SmartHOA.Infrastructure.dll
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.pdb
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/ref/SmartHOA.Infrastructure.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Infrastructure/obj/Debug/net10.0/SmartHOA.Infrastructure.sourcelink.json

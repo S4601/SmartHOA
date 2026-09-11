@@ -162,3 +162,4 @@
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Api/obj/Debug/net10.0/SmartHOA.Api.pdb
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Api/obj/Debug/net10.0/SmartHOA.Api.genruntimeconfig.cache
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Api/obj/Debug/net10.0/ref/SmartHOA.Api.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Api/obj/Debug/net10.0/SmartHOA.Api.sourcelink.json

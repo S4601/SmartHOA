@@ -78,12 +78,18 @@ namespace SmartHOA.Infrastructure.Persistence.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
+                    b.Property<int>("ApartmentCountPerFloor")
+                        .HasColumnType("integer");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("FloorCount")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("ManagerId")
                         .HasColumnType("uuid");
@@ -184,6 +190,9 @@ namespace SmartHOA.Infrastructure.Persistence.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserType")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

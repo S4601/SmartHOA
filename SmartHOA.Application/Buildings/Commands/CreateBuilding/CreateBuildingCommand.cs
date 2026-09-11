@@ -8,6 +8,8 @@ public record CreateBuildingCommand(
     string Name,
     string Address,
     string City,
+    int FloorCount,
+    int ApartmentCount,
     Guid ManagerId) : IRequest<Guid>;
 
 public class CreateBuildingCommandHandler : IRequestHandler<CreateBuildingCommand, Guid>
@@ -26,6 +28,8 @@ public class CreateBuildingCommandHandler : IRequestHandler<CreateBuildingComman
             Name = request.Name,
             Address = request.Address,
             City = request.City,
+            FloorCount = request.FloorCount,
+            ApartmentCountPerFloor = request.ApartmentCount,
             ManagerId = request.ManagerId
         };
         

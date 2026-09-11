@@ -1,4 +1,5 @@
 using SmartHOA.Domain.Common;
+using SmartHOA.Domain.Enums;
 
 namespace SmartHOA.Domain.Entities;
 
@@ -8,6 +9,7 @@ public class User : BaseEntity
     public required string LastName { get; set; }
     public required string Email { get; set; }
     public string? PhoneNumber { get; set; }
+    public required UserType UserType { get; set; }
     
     public required string PasswordHash { get; set; }
 

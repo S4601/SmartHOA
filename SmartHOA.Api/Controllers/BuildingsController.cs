@@ -19,6 +19,7 @@ public class BuildingsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] CreateBuildingCommand command)
     {
         var buildingId = await _mediator.Send(command);

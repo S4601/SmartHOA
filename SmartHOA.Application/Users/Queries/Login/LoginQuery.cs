@@ -36,7 +36,8 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, string>
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim("FirstName", user.FirstName)
+            new Claim("FirstName", user.FirstName),
+            new Claim(ClaimTypes.Role, user.UserType.ToString()),
         };
         
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]!));

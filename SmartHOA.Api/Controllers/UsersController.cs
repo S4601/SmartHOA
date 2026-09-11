@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartHOA.Application.Users.Commands.CreateUser;
 using SmartHOA.Application.Users.Queries.Login;
@@ -17,6 +18,8 @@ public class UsersController : ControllerBase
     }
     
     [HttpPost]
+    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
     {
         var userId = await _mediator.Send(command);

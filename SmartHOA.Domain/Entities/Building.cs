@@ -8,6 +8,10 @@ public class Building : BaseEntity
     public required string Address { get; set; }
     public required string City { get; set; }
     
+    public required int FloorCount { get; set; }
+    
+    public required int ApartmentCountPerFloor { get; set; }
+    
     //Домакин
     public required Guid ManagerId { get; set; }
     public User? Manager { get; set; }

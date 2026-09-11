@@ -13,3 +13,4 @@
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/refint/SmartHOA.Application.dll
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.pdb
 /Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/ref/SmartHOA.Application.dll
+/Users/alexandercholakov/DEV Projects/untitled folder/SmartHOA/SmartHOA.Application/obj/Debug/net10.0/SmartHOA.Application.sourcelink.json
