@@ -21,13 +21,17 @@ public class ApartmentController : ControllerBase
     
     
     [HttpPost]
-    [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Create([FromBody] CreateApartmentCommand command, Guid id)
+    [Authorize(Roles = "Admin,Manager")]
+    public async Task<IActionResult> Create([FromBody] CreateApartmentCommand command)
     {
         var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         var currentUserRole = User.FindFirstValue(ClaimTypes.Role);
         
-        
+        var commandWithUserContext = command with 
+        { 
+            CurrentUserId = currentUserId, 
+            CurrentUserRole = currentUserRole 
+        };
         
         var apartmentId = await _mediator.Send(command);
         

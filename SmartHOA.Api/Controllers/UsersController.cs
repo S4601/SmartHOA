@@ -18,7 +18,6 @@ public class UsersController : ControllerBase
     }
     
     [HttpPost]
-    [Authorize]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
     {
