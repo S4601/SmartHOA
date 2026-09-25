@@ -33,7 +33,7 @@ public class ApartmentController : ControllerBase
             CurrentUserRole = currentUserRole 
         };
         
-        var apartmentId = await _mediator.Send(command);
+        var apartmentId = await _mediator.Send(commandWithUserContext);
         
         return Ok(apartmentId);
     }
@@ -48,6 +48,20 @@ public class ApartmentController : ControllerBase
 
         // Подаваме ги на Query-то
         var query = new GetApartmentQuery(id, currentUserId, currentUserRole);
+        var apartment = await _mediator.Send(query);
+    
+        return Ok(apartment);
+    }
+    
+    [HttpGet]
+    [Authorize] 
+    public async Task<IActionResult> GetApartments()
+    {
+        var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var currentUserRole = User.FindFirstValue(ClaimTypes.Role);
+
+        // Подаваме ги на Query-то
+        var query = new GetApartamentsQuery(currentUserId, currentUserRole);
         var apartment = await _mediator.Send(query);
     
         return Ok(apartment);

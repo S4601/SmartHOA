@@ -47,7 +47,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Въведете 'Bearer' [интервал] и вашия токен. Пример: 'Bearer eyJhbG...'",
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
+        Type = SecuritySchemeType.Http,
         Scheme = "Bearer"
     });
 

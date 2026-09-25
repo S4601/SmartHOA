@@ -21,8 +21,17 @@ public class GetApartamentsQueryHandler : IRequestHandler<GetApartamentsQuery, L
         var query = _context.Apartments.AsQueryable();
         
         bool isAdmin = request.CurrentUserRole == "Admin";
+        bool isManager = request.CurrentUserRole == "Manager";
         
-        if (!isAdmin)
+        if (isAdmin)
+        {
+            
+        }
+        else if (isManager)
+        {
+            query = query.Where(a => a.Building.ManagerId == request.CurrentUserId);
+        }
+        else 
         {
             query = query.Where(a => a.OwnerId == request.CurrentUserId);
         }

@@ -8,8 +8,8 @@ public record CreateApartmentCommand(
     string Number,
     int Floor,
     Guid BuildingId,
-    Guid CurrentUserId,
-    string CurrentUserRole) : IRequest<Guid>;
+    Guid? CurrentUserId = null,
+    string? CurrentUserRole = null) : IRequest<Guid>;
 
 public class CreateApartmentCommandHandler : IRequestHandler<CreateApartmentCommand, Guid>
 {

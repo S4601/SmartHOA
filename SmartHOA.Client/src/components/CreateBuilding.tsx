@@ -1,7 +1,11 @@
 import { useState} from "react";
 import api from "../api.ts";
 
-export default function CreateBuilding() {
+interface CreateBuildingProps {
+    onCreateBuildingRefreshList: () => void;
+}
+
+export default function CreateBuilding({onCreateBuildingRefreshList}: CreateBuildingProps) {
     const [formData, setFormData] = useState({
         name: "",
         address: "",
@@ -29,6 +33,7 @@ export default function CreateBuilding() {
             });
 
             setMessage('✅ Сградата е създадена успешно!');
+            onCreateBuildingRefreshList();
 
             setFormData({ name: '', address: '', city: '', floorCount: 0, apartmentCount: 0, managerId: "" });
         } catch (error) {
