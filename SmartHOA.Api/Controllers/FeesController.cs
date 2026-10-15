@@ -29,7 +29,6 @@ public class FeesController : ControllerBase
     public async Task<IActionResult> PayFee(Guid feeId)
     {
         await _mediator.Send(new PayFeeCommand(feeId));
-        return Ok(new { Message = "Fee Payed Successfully" });
+        return Ok(new { Message = "Таксата е платена успешно." });
     }
 }
-

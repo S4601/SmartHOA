@@ -81,6 +81,12 @@ namespace SmartHOA.Infrastructure.Persistence.Migrations
                     b.Property<int>("ApartmentCountPerFloor")
                         .HasColumnType("integer");
 
+                    b.Property<decimal>("BaseOccupantFee")
+                        .ValueGeneratedOnAdd()
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)")
+                        .HasDefaultValue(15.00m);
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
@@ -98,6 +104,18 @@ namespace SmartHOA.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
+
+                    b.Property<decimal>("PetFee")
+                        .ValueGeneratedOnAdd()
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)")
+                        .HasDefaultValue(15.00m);
+
+                    b.Property<decimal>("RepairFundRatePerIdealPart")
+                        .ValueGeneratedOnAdd()
+                        .HasPrecision(18, 2)
+                        .HasColumnType("numeric(18,2)")
+                        .HasDefaultValue(1.50m);
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");

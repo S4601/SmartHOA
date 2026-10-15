@@ -3,4 +3,5 @@
   <Project Path="SmartHOA.Application/SmartHOA.Application.csproj" />
   <Project Path="SmartHOA.Domain/SmartHOA.Domain.csproj" />
   <Project Path="SmartHOA.Infrastructure/SmartHOA.Infrastructure.csproj" />
+  <Project Path="SmartHOA.Tests/SmartHOA.Tests.csproj" />
 </Solution>

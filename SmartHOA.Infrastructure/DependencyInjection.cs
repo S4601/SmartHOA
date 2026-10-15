@@ -14,6 +14,9 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
         
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddSingleton<IPasswordHasher, Services.PasswordHasher>();
+        services.AddScoped<ApplicationDbContextInitialiser>();
+        
         return services;
     }
 }

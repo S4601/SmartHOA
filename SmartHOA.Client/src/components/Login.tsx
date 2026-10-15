@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import axios from 'axios';
 import api from '../api';
 
 export default function Login() {
@@ -9,7 +10,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     
-    const handleSubmit = async (e : any) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
 
@@ -19,15 +20,20 @@ export default function Login() {
                 password: password
             });
             
-            const token = response.data.token; //|| response.data;
+            const token = response.data.token;
             
             localStorage.setItem('token', token);
 
             navigate('/dashboard');
-        } catch (err : any) {
+        } catch (err: unknown) {
             console.error(err);
-            if (err.response?.status === 401) {
-                setError('Грешен имейл или парола.');
+            if (axios.isAxiosError(err)) {
+                if (err.response?.status === 401) {
+                    setError('Грешен имейл или парола.');
+                } else {
+                    const message = err.response?.data?.detail || 'Възникна грешка при свързване със сървъра.';
+                    setError(message);
+                }
             } else {
                 setError('Възникна грешка при свързване със сървъра.');
             }

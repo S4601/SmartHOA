@@ -19,23 +19,17 @@ public class UsersController : ControllerBase
     
     [HttpPost]
     [Authorize(Roles = "Admin")]
+    [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command)
     {
         var userId = await _mediator.Send(command);
-        return Ok(userId);
+        return StatusCode(StatusCodes.Status201Created, new { Id = userId });
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginQuery query)
     {
-        try
-        {
-            var token = await _mediator.Send(query);
-            return Ok(new { Token = token });
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-            return Unauthorized(new { Error = ex.Message });
-        }
+        var token = await _mediator.Send(query);
+        return Ok(new { Token = token });
     }
 }

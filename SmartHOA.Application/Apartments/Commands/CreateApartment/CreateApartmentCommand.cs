@@ -1,4 +1,6 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using SmartHOA.Application.Common.Exceptions;
 using SmartHOA.Application.Common.Interfaces;
 using SmartHOA.Domain.Entities;
 
@@ -7,29 +9,38 @@ namespace SmartHOA.Application.Apartments.Commands;
 public record CreateApartmentCommand(
     string Number,
     int Floor,
-    Guid BuildingId,
-    Guid? CurrentUserId = null,
-    string? CurrentUserRole = null) : IRequest<Guid>;
+    Guid BuildingId) : IRequest<Guid>;
 
 public class CreateApartmentCommandHandler : IRequestHandler<CreateApartmentCommand, Guid>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICurrentUserService _currentUserService;
     
-    public CreateApartmentCommandHandler(IApplicationDbContext context)
+    public CreateApartmentCommandHandler(IApplicationDbContext context, ICurrentUserService currentUserService)
     {
         _context = context;
+        _currentUserService = currentUserService;
     }
 
     public async Task<Guid> Handle(CreateApartmentCommand request, CancellationToken cancellationToken)
     {
-        var building = await _context.Buildings.FindAsync(request.BuildingId);
+        var building = await _context.Buildings
+            .FirstOrDefaultAsync(b => b.Id == request.BuildingId, cancellationToken);
         
         if (building == null) 
-            throw new Exception("Сградата не е намерена.");
+            throw new NotFoundException("Сграда", request.BuildingId);
         
-        if (request.CurrentUserRole != "Admin" && building.ManagerId != request.CurrentUserId)
+        if (_currentUserService.Role != "Admin" && building.ManagerId != _currentUserService.UserId)
         {
-            throw new UnauthorizedAccessException("Нямате права да добавяте апартаменти към тази сграда, тъй като не сте нейният управител.");
+            throw new ForbiddenAccessException("Нямате права да добавяте апартаменти към тази сграда, тъй като не сте нейният управител.");
+        }
+
+        var exists = await _context.Apartments
+            .AnyAsync(a => a.BuildingId == request.BuildingId && a.Number == request.Number, cancellationToken);
+
+        if (exists)
+        {
+            throw new BadRequestException($"Апартамент с номер '{request.Number}' вече съществува в тази сграда.");
         }
         
         var apartment = new Apartment

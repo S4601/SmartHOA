@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartHOA.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a341a142953c1c84f0e86fd5e105a6c5038e592d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b62785d222af8db1ed7251a947a112da785cc6ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartHOA.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartHOA.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

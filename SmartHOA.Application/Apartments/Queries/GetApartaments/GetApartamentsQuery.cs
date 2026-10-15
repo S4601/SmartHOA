@@ -1,48 +1,53 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SmartHOA.Application.Common.Interfaces;
-using SmartHOA.Domain.Entities;
 
 namespace SmartHOA.Application.Apartments.Queries.GetApartaments;
 
-public record GetApartamentsQuery(Guid CurrentUserId, string? CurrentUserRole) : IRequest<List<ApartmentDto>>;
+public record GetApartamentsQuery : IRequest<List<ApartmentDto>>;
 
 public class GetApartamentsQueryHandler : IRequestHandler<GetApartamentsQuery, List<ApartmentDto>>
 {
     private readonly IApplicationDbContext _context;
+    private readonly ICurrentUserService _currentUserService;
 
-    public GetApartamentsQueryHandler(IApplicationDbContext context)
+    public GetApartamentsQueryHandler(IApplicationDbContext context, ICurrentUserService currentUserService)
     {
         _context = context;
+        _currentUserService = currentUserService;
     }
 
     public async Task<List<ApartmentDto>> Handle(GetApartamentsQuery request, CancellationToken cancellationToken)
     {
-        var query = _context.Apartments.AsQueryable();
+        var query = _context.Apartments.AsNoTracking().AsQueryable();
         
-        bool isAdmin = request.CurrentUserRole == "Admin";
-        bool isManager = request.CurrentUserRole == "Manager";
-        
-        if (isAdmin)
+        var role = _currentUserService.Role;
+        var currentUserId = _currentUserService.UserId;
+
+        if (role == "Admin")
         {
-            
+            // Админ вижда всички апартаменти
         }
-        else if (isManager)
+        else if (role == "Manager")
         {
-            query = query.Where(a => a.Building.ManagerId == request.CurrentUserId);
+            // Домоуправител вижда апартаментите в сградите, които управлява
+            query = query.Where(a => a.Building != null && a.Building.ManagerId == currentUserId);
         }
         else 
         {
-            query = query.Where(a => a.OwnerId == request.CurrentUserId);
+            // Собственик / Обитател вижда само своите апартаменти
+            query = query.Where(a => a.OwnerId == currentUserId);
         }
 
-        var apartaments = await query
+        var apartments = await query
             .Select(a => new ApartmentDto(
                 a.Id,
                 a.Number,
                 a.Floor,
-                a.Building.Name)).ToListAsync(cancellationToken);
+                a.Building != null ? a.Building.Name : string.Empty,
+                a.Building != null ? a.Building.Name : string.Empty))
+            .ToListAsync(cancellationToken);
         
-        return apartaments;
+        return apartments;
     }
 }

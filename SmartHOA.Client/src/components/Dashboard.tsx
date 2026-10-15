@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router';
 import CreateUser from "./CreateUser.tsx";
 import CreateBuilding from "./CreateBuilding.tsx";
 import CreateApartament from "./CreateApartament.tsx";
@@ -12,12 +12,23 @@ interface UserData {
     'FirstName'?: string;
     'email'?: string;
     'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'?: string;
-    [key: string]: any;
+    'role'?: string;
+    [key: string]: unknown;
 }
 
 export default function Dashboard() {
-    const [userData, setUserData] = useState<UserData | null>(null);
     const navigate = useNavigate();
+
+    const [userData] = useState<UserData | null>(() => {
+        const token = localStorage.getItem("token");
+        if (!token) return null;
+        try {
+            return jwtDecode<UserData>(token);
+        } catch {
+            localStorage.removeItem("token");
+            return null;
+        }
+    });
 
     const [isUserModalOpen, setIsUserModalOpen] = useState(false);
     const [isBuildingModalOpen, setIsBuildingModalOpen] = useState(false);
@@ -28,25 +39,10 @@ export default function Dashboard() {
     const [refreshBuildingsKey, setRefreshBuildingsKey] = useState(0);
     
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        
-        if(token) {
-            try {
-                const decoded = jwtDecode(token);
-    
-                console.log("Моят токен съдържа:", decoded);
-                console.log(token);
-
-                setUserData(decoded);
-            } catch (error) {
-                console.error("Невалиден токен", error);
-                localStorage.removeItem("token");
-                navigate("/login", { replace: true });
-            }
-        } else {
+        if (!userData) {
             navigate("/login", { replace: true });
         }
-    }, [navigate]);
+    }, [userData, navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -73,8 +69,9 @@ export default function Dashboard() {
     }
 
     const roleClaim = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
-    const isAdmin = userData[roleClaim] === 'Admin';
-    const isManager = userData[roleClaim] === 'Manager';
+    const userRole = userData[roleClaim] || userData['role'] || '';
+    const isAdmin = userRole === 'Admin';
+    const isManager = userRole === 'Manager';
     
     return (
         <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>

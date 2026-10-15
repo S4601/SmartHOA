@@ -11,7 +11,7 @@ public class ApplicationDbContext : DbContext,  IApplicationDbContext
     {
     }
 
-    public DbSet<User> Users => Set<User>();
+    public virtual DbSet<User> Users { get; set; }
     public DbSet<Building> Buildings => Set<Building>();
     public DbSet<Apartment> Apartments => Set<Apartment>();
     public DbSet<MonthlyFee> Fees => Set<MonthlyFee>();

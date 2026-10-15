@@ -6,7 +6,7 @@ using SmartHOA.Domain.Enums;
 
 namespace SmartHOA.Application.Fees.Commands.GenerateMonthlyFees;
 
-public record GenerateMonthlyFeesCommand : IRequest;
+public record GenerateMonthlyFeesCommand(int? Year = null, int? Month = null) : IRequest;
 
 public class GenerateMonthlyFeesCommandHandler : IRequestHandler<GenerateMonthlyFeesCommand>
 {
@@ -19,47 +19,81 @@ public class GenerateMonthlyFeesCommandHandler : IRequestHandler<GenerateMonthly
 
     public async Task Handle(GenerateMonthlyFeesCommand request, CancellationToken cancellationToken)
     {
-        var aprtments = await _context.Apartments.ToListAsync(cancellationToken);
-        
-        var dueDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 15);
-        var currentMonthName = DateTime.UtcNow.ToString("MMMM yyyy");
+        var now = DateTime.UtcNow;
+        var year = request.Year ?? now.Year;
+        var month = request.Month ?? now.Month;
 
-        foreach (var apt in aprtments)
+        var monthStart = new DateTime(year, month, 1, 0, 0, 0, DateTimeKind.Utc);
+        var monthEnd = monthStart.AddMonths(1);
+        var dueDate = new DateTime(year, month, Math.Min(15, DateTime.DaysInMonth(year, month)), 23, 59, 59, DateTimeKind.Utc);
+        var currentMonthName = monthStart.ToString("MMMM yyyy");
+
+        // Извличаме вече съществуващите такси за този период, за да гарантираме идемпотентност (без дублиране)
+        var existingFees = await _context.Fees
+            .Where(f => f.DueDate >= monthStart && f.DueDate < monthEnd)
+            .Select(f => new { f.ApartmentId, f.Type })
+            .ToListAsync(cancellationToken);
+
+        var existingSet = new HashSet<(Guid ApartmentId, FeeType Type)>(
+            existingFees.Select(f => (f.ApartmentId, f.Type)));
+
+        // Извличаме сградите с техните тарифи и апартаменти
+        var buildings = await _context.Buildings
+            .Include(b => b.Apartments)
+            .ToListAsync(cancellationToken);
+
+        foreach (var building in buildings)
         {
-            decimal occupantsTotal = apt.OccupantsCount * 15m;
-            decimal petsTotal = apt.HasPets ? 15m : 0;
-            decimal totalMaintenanceAmount = occupantsTotal + petsTotal;
-
-            if (totalMaintenanceAmount > 0)
+            foreach (var apt in building.Apartments)
             {
-                var maintenanceFee = new MonthlyFee
+                // 1. Такса поддръжка (базирана на обитатели и домашни любимци по тарифа на сградата)
+                if (!existingSet.Contains((apt.Id, FeeType.Maintenance)))
                 {
-                    Amount = totalMaintenanceAmount,
-                    Description = $"Такса поддръжка за {currentMonthName}",
-                    DueDate = dueDate,
-                    Type = FeeType.Maintenance,
-                    ApartmentId = apt.Id,
-                    DateFeeIncurred = DateTime.UtcNow
-                };
-                
-                _context.Fees.Add(maintenanceFee);
-            }
+                    decimal occupantsTotal = apt.OccupantsCount * building.BaseOccupantFee;
+                    decimal petsTotal = apt.HasPets ? building.PetFee : 0m;
+                    decimal totalMaintenanceAmount = occupantsTotal + petsTotal;
 
-            if (apt.IdealParts > 0)
-            {
-                var repairFee = new MonthlyFee
+                    if (totalMaintenanceAmount > 0)
+                    {
+                        var maintenanceFee = new MonthlyFee
+                        {
+                            Amount = totalMaintenanceAmount,
+                            Description = $"Такса поддръжка за {currentMonthName}",
+                            DueDate = dueDate,
+                            Type = FeeType.Maintenance,
+                            ApartmentId = apt.Id,
+                            DateFeeIncurred = now
+                        };
+                        
+                        _context.Fees.Add(maintenanceFee);
+                        existingSet.Add((apt.Id, FeeType.Maintenance));
+                    }
+                }
+
+                // 2. Фонд "Ремонт" (базиран на процент идеални части по тарифа на сградата)
+                if (!existingSet.Contains((apt.Id, FeeType.RepairFund)) && apt.IdealParts > 0)
                 {
-                    Amount = apt.IdealParts * 1.50m,
-                    Description = $"Фонд ремонт за {currentMonthName}",
-                    DueDate = dueDate,
-                    Type = FeeType.RepairFund,
-                    ApartmentId = apt.Id,
-                    DateFeeIncurred = DateTime.UtcNow
-                };
+                    decimal repairAmount = apt.IdealParts * building.RepairFundRatePerIdealPart;
 
-                _context.Fees.Add(repairFee);
+                    if (repairAmount > 0)
+                    {
+                        var repairFee = new MonthlyFee
+                        {
+                            Amount = repairAmount,
+                            Description = $"Фонд ремонт за {currentMonthName}",
+                            DueDate = dueDate,
+                            Type = FeeType.RepairFund,
+                            ApartmentId = apt.Id,
+                            DateFeeIncurred = now
+                        };
+
+                        _context.Fees.Add(repairFee);
+                        existingSet.Add((apt.Id, FeeType.RepairFund));
+                    }
+                }
             }
         }
+
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

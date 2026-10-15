@@ -20,6 +20,18 @@ public class BuildingConfiguration : IEntityTypeConfiguration<Building>
             .IsRequired()
             .HasMaxLength(250);
 
+        builder.Property(b => b.BaseOccupantFee)
+            .HasPrecision(18, 2)
+            .HasDefaultValue(15.00m);
+
+        builder.Property(b => b.PetFee)
+            .HasPrecision(18, 2)
+            .HasDefaultValue(15.00m);
+
+        builder.Property(b => b.RepairFundRatePerIdealPart)
+            .HasPrecision(18, 2)
+            .HasDefaultValue(1.50m);
+
         // Конфигуриране на релацията (Един Домоуправител има Много Сгради)
         builder.HasOne(b => b.Manager)
             .WithMany(u => u.ManagedBuildings)

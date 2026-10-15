@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import api from "../api.ts";
+import {useNavigate} from "react-router";
 
 
 interface ApartmentDto {
@@ -17,6 +18,8 @@ export default function ApartmentList({refreshKey = 0} : ApartmentListProps) {
     const [apartments, setApartments] = useState<ApartmentDto[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>("");
+    
+    const navigate = useNavigate();
     
     useEffect(() => {
         const fetchApartments = async () => {
@@ -55,6 +58,7 @@ export default function ApartmentList({refreshKey = 0} : ApartmentListProps) {
                         <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>Сграда</th>
                         <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>Етаж</th>
                         <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>Апартамент №</th>
+                        <th style={{ padding: '10px', borderBottom: '1px solid #ddd' }}></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,6 +67,7 @@ export default function ApartmentList({refreshKey = 0} : ApartmentListProps) {
                             <td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>{apt.name}</td>
                             <td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>{apt.floor}</td>
                             <td style={{ padding: '10px', borderBottom: '1px solid #eee' }}>{apt.number}</td>
+                            <td style={{ padding: '10px', borderBottom: '1px solid #eee' }}><button onClick={() => navigate(`/apartments/${apt.id}`)}>View details</button></td>
                         </tr>
                     ))}
                     </tbody>

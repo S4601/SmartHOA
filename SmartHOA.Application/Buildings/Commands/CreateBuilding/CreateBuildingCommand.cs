@@ -1,4 +1,6 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using SmartHOA.Application.Common.Exceptions;
 using SmartHOA.Application.Common.Interfaces;
 using SmartHOA.Domain.Entities;
 
@@ -23,6 +25,14 @@ public class CreateBuildingCommandHandler : IRequestHandler<CreateBuildingComman
 
     public async Task<Guid> Handle(CreateBuildingCommand request, CancellationToken cancellationToken)
     {
+        var manager = await _context.Users
+            .FirstOrDefaultAsync(u => u.Id == request.ManagerId, cancellationToken);
+
+        if (manager == null)
+        {
+            throw new NotFoundException("Потребител (домоуправител)", request.ManagerId);
+        }
+
         var building = new Building
         {
             Name = request.Name,
